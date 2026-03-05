@@ -21,7 +21,7 @@ const displayLessons = (lessons) => {
     btnDiv.setAttribute("data-tip", lesson.lessonName);
 
     btnDiv.innerHTML = `
-                <button onclick="loadLevelWords(${lesson.level_no})" value="${lesson.level_no}" class="btn btn-soft btn-primary"> 
+                <button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWords(${lesson.level_no})" value="${lesson.level_no}" class="btn btn-soft btn-primary lesson-btn"> 
                     <i class="fa-solid fa-book-open"></i>
                     Lesson - ${lesson.level_no}
                 </button>
@@ -35,7 +35,22 @@ const loadLevelWords = (id) => {
   const wordsApiUrl = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(wordsApiUrl)
   .then(res => res.json())
-  .then(words => displayLevelWords(words.data));
+  .then(words => {
+
+    toggleState(); //to add btn-soft class for all buttons by default
+    const clickedBtn = document.getElementById(`lesson-btn-${id}`);
+    clickedBtn.classList.remove('btn-soft');
+
+    displayLevelWords(words.data);
+  })
+}
+
+// function to add btn-soft class for all buttons by default
+const toggleState = () =>{
+    const lessonBtns = document.querySelectorAll('.lesson-btn');
+    lessonBtns.forEach(btn => {
+        btn.classList.add('btn-soft');
+    })
 }
 
 // function to display words in ui 
