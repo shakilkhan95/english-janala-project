@@ -49,7 +49,7 @@ const displayLevelWords = (words) => {
         wordsContainer.classList.remove("md:grid-cols-2", "lg:grid-cols-3");
         const alertDiv = document.createElement('div');
         alertDiv.innerHTML = `
-            <div><img class="mx-auto" src="/assets/alert-error.png"></div>
+            <div><img class="mx-auto" src="./assets/alert-error.png"></div>
             <p class="text-center text-sm text-[#79716B] font-bangla">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
             <h3 class="text-center text-3xl text-[#292524] font-bangla mt-5">নেক্সট Lesson এ যান</h3>
         `;
@@ -66,9 +66,9 @@ const displayLevelWords = (words) => {
             <!-- word card  -->
             <div class="card bg-white text-white-content h-full pt-5">
                 <div class="card-body items-center text-center">
-                    <h2 class="card-title text-neutral text-3xl font-bold">${word.word}</h2>
+                    <h2 class="card-title text-neutral text-3xl font-bold">${word.word ? word.word : "!শব্দটি পাওয়া যায়নি"}</h2>
                     <p class="text-neutral text-xl font-medium">Meaning / Pronounciation</p>
-                    <h2 class="card-title text-[#18181B] text-3xl font-semibold">"${word.meaning} / ${word.pronunciation}"</h2>
+                    <h2 class="card-title text-[#18181B] text-3xl font-semibold">"${word.meaning ? word.meaning : "!অর্থ পাওয়া যায়নি"} / ${word.pronunciation ? word.pronunciation : "!Pronunciation পাওয়া যায়নি"}"</h2>
                     <div class="flex justify-between w-full mt-3">
                         <button class="btn btn-square cursor-default"><i class="fa-solid fa-circle-exclamation"></i></button>
                         <button class="btn btn-square cursor-default"><i class="fa-solid fa-volume-high"></i></button>
