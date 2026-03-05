@@ -121,13 +121,24 @@ const displayWordDetails = (word) => {
                 <div class="space-y-2">
                     <p class="text-2xl font-medium text-black font-bangla text-center">সমার্থক শব্দ গুলো</p>
                     <div class="flex justify-center items-center flex-wrap gap-5">
-                        <span class="rounded bg-blue-200 p-2">${word.synonyms[0] ? word.synonyms[0] : "!সমার্থক শব্দটি পাওয়া যায়নি"}</span>
-                        <span class="rounded bg-blue-200 p-2">${word.synonyms[1] ? word.synonyms[1] : "!সমার্থক শব্দটি পাওয়া যায়নি"}</span>
-                        <span class="rounded bg-blue-200 p-2">${word.synonyms[2] ? word.synonyms[2] : "!সমার্থক শব্দটি পাওয়া যায়নি"}</span>
+                        ${displaySynonyms(word.synonyms)}
                     </div>
                 </div>
     `;
     document.getElementById("word_modal").showModal();
+}
+
+// function to display synonyms dynamically
+
+const displaySynonyms = (synonyms) => {
+  const htmlElement = synonyms.map(
+    (el) =>
+      `<span class="rounded bg-blue-200 p-2">${el}</span>`
+  );
+  if(htmlElement.join(' ').length === 0){
+    return `<span class="rounded bg-blue-200 p-2">"!সমার্থক শব্দ পাওয়া যায়নি"</span>`;
+  }
+  return htmlElement.join(' ');
 }
 
 loadLessons();
