@@ -119,11 +119,11 @@ const displayWordDetails = (word) => {
                 </div>
     
                 <div class="space-y-2">
-                    <p class="text-2xl font-medium text-black font-bangla">সমার্থক শব্দ গুলো</p>
-                    <div class="space-x-2">
-                        <span class="rounded bg-blue-200 p-1">${word.synonyms[0] ? word.synonyms[0] : "!সমার্থক শব্দটি পাওয়া যায়নি"}</span>
-                        <span class="rounded bg-blue-200 p-1">${word.synonyms[1] ? word.synonyms[1] : "!সমার্থক শব্দটি পাওয়া যায়নি"}</span>
-                        <span class="rounded bg-blue-200 p-1">${word.synonyms[2] ? word.synonyms[2] : "!সমার্থক শব্দটি পাওয়া যায়নি"}</span>
+                    <p class="text-2xl font-medium text-black font-bangla text-center">সমার্থক শব্দ গুলো</p>
+                    <div class="flex justify-center items-center flex-wrap gap-5">
+                        <span class="rounded bg-blue-200 p-2">${word.synonyms[0] ? word.synonyms[0] : "!সমার্থক শব্দটি পাওয়া যায়নি"}</span>
+                        <span class="rounded bg-blue-200 p-2">${word.synonyms[1] ? word.synonyms[1] : "!সমার্থক শব্দটি পাওয়া যায়নি"}</span>
+                        <span class="rounded bg-blue-200 p-2">${word.synonyms[2] ? word.synonyms[2] : "!সমার্থক শব্দটি পাওয়া যায়নি"}</span>
                     </div>
                 </div>
     `;
