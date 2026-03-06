@@ -9,6 +9,13 @@ const wordSpinner = (status) => {
   }
 };
 
+// function to pronounce a word
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 // function to fetch api to get the data
 const loadLessons = () => {
   const lessonsApiUrl = "https://openapi.programming-hero.com/api/levels/all";
@@ -98,7 +105,7 @@ const displayLevelWords = (words) => {
                     <h2 class="card-title text-[#18181B] text-3xl font-semibold">"${word.meaning ? word.meaning : "!অর্থ পাওয়া যায়নি"} / ${word.pronunciation ? word.pronunciation : "!Pronunciation পাওয়া যায়নি"}"</h2>
                     <div class="flex justify-between w-full mt-3">
                         <button onclick="loadWordDetails(${word.id})" class="btn btn-square cursor-default"><i class="fa-solid fa-circle-exclamation"></i></button>
-                        <button class="btn btn-square cursor-default"><i class="fa-solid fa-volume-high"></i></button>
+                        <button onclick="pronounceWord('${word.word}')" class="btn btn-square cursor-default"><i class="fa-solid fa-volume-high"></i></button>
                     </div>
                 </div>
             </div>
