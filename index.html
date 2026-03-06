@@ -130,6 +130,21 @@
         <div id="level-container" class="mt-8 flex justify-center gap-5 flex-wrap"></div>
     </section>
 
+    <!-- search input  -->
+    <section id="search" class="my-10 flex justify-center items-center">
+        <div class="join">
+            <div>
+                <input id="input-search" class="input" type="text" placeholder="Type the word to search" required />
+            </div>
+            <button id="btn-search" class="btn btn-primary join-item">Search</button>
+        </div>
+    </section>
+
+    <!-- loading spinner section  -->
+    <section id="spinner" class="flex justify-center items-center py-20 hidden">
+        <span class="loading loading-bars loading-xl"></span>
+    </section>
+
     <!-- Words container starts here  -->
     <section id="words-container" class="bg-gray-200 p-10 my-10 w-11/12 mx-auto rounded-sm grid auto-rows-fr gap-5">
         <p class="text-center text-sm text-[#79716B] font-bangla">আপনি এখনো কোন Lesson Select করেন নি</p>
@@ -141,9 +156,7 @@
     <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
         <div class="modal-box">
             <!-- word details container  -->
-            <div id="details-container" class="space-y-5">
-                
-            </div>
+            <div id="details-container" class="space-y-5"></div>
     
             <div class="modal-action">
                 <form method="dialog">

@@ -1,3 +1,14 @@
+// function to control word spinner
+const wordSpinner = (status) => {
+  if (status) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("words-container").classList.add("hidden");
+  } else {
+    document.getElementById("words-container").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+  }
+};
+
 // function to fetch api to get the data
 const loadLessons = () => {
   const lessonsApiUrl = "https://openapi.programming-hero.com/api/levels/all";
@@ -32,6 +43,7 @@ const displayLessons = (lessons) => {
 
 // function to fetch and load words from api
 const loadLevelWords = (id) => {
+  wordSpinner(true);
   const wordsApiUrl = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(wordsApiUrl)
     .then((res) => res.json())
@@ -68,6 +80,7 @@ const displayLevelWords = (words) => {
             <h3 class="text-center text-3xl text-[#292524] font-bangla mt-5">নেক্সট Lesson এ যান</h3>
         `;
     wordsContainer.append(alertDiv);
+    wordSpinner(false);
     return;
   }
 
@@ -91,6 +104,7 @@ const displayLevelWords = (words) => {
             </div>
         `;
     wordsContainer.append(cardDiv);
+    wordSpinner(false);
   });
 };
 
@@ -99,13 +113,13 @@ const loadWordDetails = async (id) => {
   const wordDetailsUrl = `https://openapi.programming-hero.com/api/word/${id}`;
   const res = await fetch(wordDetailsUrl);
   const details = await res.json();
-  displayWordDetails(details.data)
+  displayWordDetails(details.data);
 };
 
 // function to display word details in ui by a modal
 const displayWordDetails = (word) => {
-    const wordDetailsContainer = document.getElementById("details-container");
-    wordDetailsContainer.innerHTML = `
+  const wordDetailsContainer = document.getElementById("details-container");
+  wordDetailsContainer.innerHTML = `
                 <h2 class="text-4xl font-semibold text-black">${word.word ? word.word : "!শব্দটি পাওয়া যায়নি"} (<i class="fa-solid fa-microphone-lines"></i> :${word.pronunciation ? word.pronunciation : "!শব্দটি পাওয়া যায়নি"})
                 </h2>
                 <div>
@@ -125,20 +139,37 @@ const displayWordDetails = (word) => {
                     </div>
                 </div>
     `;
-    document.getElementById("word_modal").showModal();
-}
+  document.getElementById("word_modal").showModal();
+};
 
 // function to display synonyms dynamically
 
 const displaySynonyms = (synonyms) => {
   const htmlElement = synonyms.map(
-    (el) =>
-      `<span class="rounded bg-blue-200 p-2">${el}</span>`
+    (el) => `<span class="rounded bg-blue-200 p-2">${el}</span>`,
   );
-  if(htmlElement.join(' ').length === 0){
+  if (htmlElement.join(" ").length === 0) {
     return `<span class="rounded bg-blue-200 p-2">"!সমার্থক শব্দ পাওয়া যায়নি"</span>`;
   }
-  return htmlElement.join(' ');
-}
+  return htmlElement.join(" ");
+};
 
 loadLessons();
+
+// function to search words
+document.getElementById("btn-search").addEventListener("click", () => {
+  // refresh the status 
+  toggleState();
+  // Get the value from search input
+  const inputSearch = document.getElementById("input-search");
+  const searchValue = inputSearch.value.trim().toLowerCase();
+
+  // fetch and get all words with api
+  fetch("https://openapi.programming-hero.com/api/words/all")
+  .then(res => res.json())
+  .then(data => {
+    const allWords = data.data;
+    const filteredWord = allWords.filter(word => word.word.toLowerCase().includes(searchValue));
+    displayLevelWords(filteredWord);
+  })
+});
